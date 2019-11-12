@@ -1,0 +1,93 @@
+/* base styles  */
+
+body {
+    background-color: #04205a;
+}
+
+#container {
+    background: #0d1521;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px 0 50px;
+}
+
+#logo {
+    background: url('./ninja-logo.png') no-repeat center;
+    height: 37px;
+}
+
+.user-input {
+    text-align: center;
+    width: 80%;
+    padding: 10px 15px;
+    font-size: 20px;
+    font-weight: 300;
+    color: #d2abab;
+    border: 0;
+    outline: none;
+    background-color: #04205a;
+    border-top: 1px solid white;
+    transition: all .2s ease-in;
+}
+
+.user-input:focus {
+    border-bottom: 2px solid #515151;
+}
+
+.user-button {
+    text-align: center;
+    padding: 3px 18px;
+    color: #ef211f;
+    font-size: 20px;
+    outline: none;
+    font-weight: 300;
+    background-color: black;
+    margin-left: -80px;
+}
+
+.user-button:hover {
+    border: 2px solid #515151;
+}
+
+ul {
+    width: 55%;
+    margin: 50px auto;
+    padding: 0;
+    list-style: none;
+}
+
+.ninja-item {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 15px;
+    color: #dde2e4;
+    border-bottom: 1px solid;
+    margin: 30px auto;
+}
+
+.ninja-item:hover {
+    text-decoration: line-through;
+    cursor: pointer;
+}
+
+/* styles for desktop */
+@media only screen and (min-width:900px) {
+    .user-button {
+        padding: 6px 22px;
+        margin-left: -90px;
+    }
+
+    .user-input {
+        width: 60%;
+        padding: 12px 20px;
+    }
+
+    ul {
+        width: 25%;
+    }
+
+    .ninja-item {
+        padding: 1px 10px;
+        margin: 25px auto;
+    }
+}
