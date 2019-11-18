@@ -24,7 +24,7 @@
 
       <ul>
         <% for( let index=0; index < list.length; index++ ) { %>
-        <li class="ninja-item" id=<%= index %> ><%= list[index] %></li>
+        <li class="ninja-item" id=<%= list[index].id %> ><%= list[index].todo %></li>
         <% } %>
       </ul>
     </div>
