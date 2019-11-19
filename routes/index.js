@@ -1,8 +1,9 @@
 const express = require("express");
 const db = require("../models");
 const routes = express.Router();
+const passport = require("../config/passport");
 
-// ROUTES
+// ROUTES: task
 // GET home
 routes.get("/home", function(req, res) {
   db.Tasks.findAll({
@@ -32,8 +33,36 @@ routes.delete("/delete/:index", function(req, res) {
     // console.log(results);
     res.redirect("/home");
   });
-
-  res.json(list);
 });
+
+// ROUTES: users
+
+// GET login
+routes.get("/user/login", function(req, res) {
+  res.render("login.ejs");
+});
+
+// POST login
+routes.post(
+  "/user/login",
+  passport.authenticate("local", {
+    successRedirect: "/home",
+    failureRedirect: "/user/login"
+  })
+);
+
+// GET signup
+routes.get("/user/signup", function(req, res) {
+  res.render("registration.ejs");
+});
+
+// POST signup
+routes.post(
+  "/user/signup",
+  passport.authenticate("local-signup", {
+    successRedirect: "/home",
+    failureRedirect: "/user/signup"
+  })
+);
 
 module.exports = routes;
