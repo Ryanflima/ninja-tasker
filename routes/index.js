@@ -2,15 +2,16 @@ const express = require("express");
 const db = require("../models");
 const routes = express.Router();
 const passport = require("../config/passport");
+const authenticate = require("../config/middleware/isAuthenticated");
 
 // ROUTES: task
 // GET home
-routes.get("/home", function(req, res) {
+routes.get("/home", authenticate, function(req, res) {
   db.Tasks.findAll({
-    attributes: ["id", "todo"]
+    where: { userID: req.user.id }
   }).then(function(results) {
-    console.log(results);
-    res.render("home.ejs", { list: results });
+    // console.log(results);
+    res.render("home.ejs", { list: results, user: req.user });
   });
 });
 
@@ -18,7 +19,8 @@ routes.get("/home", function(req, res) {
 routes.post("/ninja", function(req, res) {
   // console.log(req.body.taskItem);
   db.Tasks.create({
-    todo: req.body.taskItem
+    todo: req.body.taskItem,
+    userID: req.user.id
   }).then(function(results) {
     // console.log(results);
     res.redirect("/home");
@@ -64,5 +66,16 @@ routes.post(
     failureRedirect: "/user/signup"
   })
 );
+
+// GET profile
+routes.get("/profile", authenticate, function(req, res) {
+  res.render("profile.ejs", { user: req.user });
+});
+
+// GET logout
+routes.get("/logout", function(req, res) {
+  req.logOut();
+  res.redirect("/home");
+});
 
 module.exports = routes;

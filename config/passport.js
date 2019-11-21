@@ -47,6 +47,7 @@ passport.use(
         } else {
           // if there is no user create one
           db.Users.create({
+            nickname: req.body.name,
             email: email,
             password: password
           }).then(function(newUser) {
